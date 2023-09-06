@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'segselect = segselect:select',
+            'segselect = segselect:select_by_voxel_cli',
         ],
     },
     python_requires=">=3.9",
