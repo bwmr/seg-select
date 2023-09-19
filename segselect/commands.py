@@ -21,12 +21,17 @@ def select_by_voxel_cli(input_file, seg_nr):
     output: binary mrc with only all selected voxels set to 1
 
     """
-    select_by_voxel(input_file, seg_nr)
+    input_file = Path(input_file)
+
+    output_seg, angpix = select_by_voxel(input_file, seg_nr)
+
+    seg_str = [str(seg) for seg in seg_nr]
+
+    mrcfile.write(input_file.with_name(f'{input_file.stem}_sel_{"_".join(seg_str)}.mrc'),
+                  data=output_seg, overwrite=True, voxel_size=angpix)
 
 
 def select_by_voxel(input_file, seg_nr):
-    
-    input_file = Path(input_file)
 
     with mrcfile.open(input_file, mode='r') as mrc:
         input_seg = mrc.data
@@ -38,9 +43,4 @@ def select_by_voxel(input_file, seg_nr):
         seg = int(seg)
         output_seg[np.where(input_seg == seg)] = 1
 
-    seg_str = [str(seg) for seg in seg_nr]
-
-    mrcfile.write(input_file.with_name(f'{input_file.stem}_sel_{"_".join(seg_str)}.mrc'),
-                  data=output_seg, overwrite=True, voxel_size=angpix)
-
-    return input_file.with_name(f'{input_file.stem}_sel_{"_".join(seg_str)}.mrc')
+    return output_seg, float(angpix)
