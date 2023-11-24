@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 @click.command()
-@click.argument('input_file', nargs=1, type=click.File())
+@click.argument('input_file', nargs=1, type=click.Path(exists=True, file_okay=True, dir_okay=False))
 @click.argument('seg_nr', nargs=-1, type=int)
 def select_by_voxel_cli(input_file, seg_nr):
     """
