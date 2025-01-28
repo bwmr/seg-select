@@ -1,17 +1,19 @@
-import mrcfile
-import click
-import numpy as np
-
 from pathlib import Path
+
+import click
+import mrcfile
+import numpy as np
 
 
 @click.command()
-@click.argument('input_file', nargs=1, type=click.Path(exists=True, file_okay=True, dir_okay=False))
+@click.argument('input_file',
+                nargs=1,
+                type=click.Path(exists=True,
+                                file_okay=True,
+                                dir_okay=False))
 @click.argument('seg_nr', nargs=-1, type=int)
 def select_by_voxel_cli(input_file, seg_nr):
     """
-    seg-select
-
     Select specific connected component from segmentation.
 
     input_file: mrc with component number as voxel value
@@ -32,7 +34,7 @@ def select_by_voxel_cli(input_file, seg_nr):
 
 
 def select_by_voxel(input_file, seg_nr):
-
+    """Select seg_nr from voxels in input_file."""
     with mrcfile.open(input_file, mode='r') as mrc:
         input_seg = mrc.data
         angpix = mrc.voxel_size.x

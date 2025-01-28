@@ -4,3 +4,6 @@ Turn voxel-segmentations to binary based on voxel value: All voxels with these v
 I use this to clean up segmentations from membrain-seg (with ``--store-connected-components``)
 
 Usage: ``segselect segmentation.mrc component1 component2 [...]``
+
+Installation:
+`pip install 'git+https://github.com/bwmr/seg-select.git'`
