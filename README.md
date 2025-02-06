@@ -1,4 +1,8 @@
-# seg-select
+**This repository is not under development anymore, have a look at the napari plugin `napari-segselect` instead:**  
+https://github.com/bwmr/napari-segselect
+
+## seg-select
+
 Turn voxel-segmentations to binary based on voxel value: All voxels with these values will be set to 1, all others to 0. Will output a mrc file. 
 
 I use this to clean up segmentations from membrain-seg (with ``--store-connected-components``)
